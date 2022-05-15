@@ -96,7 +96,7 @@ const Wrapper = styled.div`
 `
 
 const ArrowImg = styled.img`
-
+  
 `
 
 const Arrow = styled.div`
@@ -110,11 +110,11 @@ const Arrow = styled.div`
   top: 0;
   bottom: 0;
   margin: auto;
-  left: ${props => props.direction === 'left' && '10px'};
-  right: ${props => props.direction === 'right' && '10px'};
+  left: ${props => props.direction === 'left' && '20px'};
+  right: ${props => props.direction === 'right' && '20px'};
   cursor: pointer;
   z-index: 5;
-  
+  background-color: rgba(255,255,255,0.3);
   
 `
 
