@@ -96,7 +96,9 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     jsutify-content: space-between;
-    position: fixed;
+    position: absolute;
+    z-index: 99;
+    
 
 `
 
