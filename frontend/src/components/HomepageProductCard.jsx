@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import productimg from '../assets/product_placeholder.jpg'
+import { Link } from 'react-router-dom';
 
 const HomepageProductCard = (props) => {
 
@@ -8,14 +8,34 @@ const HomepageProductCard = (props) => {
       
 
   return (
+    
     <Container>
+        <Banner>{product && product.reducere}</Banner>
+        <Link to={product && `/${product.categorie}/${product.slug}`}>
         <Image src={product && product.imagine}/>
+        </Link>
         <Title>{product && product.name}</Title>
         <Price>{product && product.pret['500g']}</Price>
         <AddToCartButton>Adaugă în coș</AddToCartButton>
     </Container>
+    
   )
 }
+
+const Banner = styled.span`
+    font-size: 20px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 20%;
+    background-color: green;
+    z-index: 99;
+    transform: translateX(-50%);
+    padding: 5px;
+    color: white;
+    text-shadow: 2px 2px 2px gray;
+    
+`
 
 const AddToCartButton = styled.button`
     width: 100%;
@@ -47,6 +67,7 @@ const Image = styled.img`
     border-radius: 0px 35px 35px 35px;
     transition: 0.6s ease;
     border: 2px solid green;
+    
     &:hover {
         transform: scale(1.05);
         border-radius: 0px 35px 0px 35px;
@@ -55,12 +76,13 @@ const Image = styled.img`
 `
 
 const Container = styled.div`
-    width: 17%;
-    
+    width: 20%;
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 10px;
     align-items: center;
+    
     @media only screen and (max-width: 800px) {
         width: 50%;
     }

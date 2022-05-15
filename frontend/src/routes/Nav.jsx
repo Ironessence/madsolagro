@@ -153,12 +153,13 @@ const LogoContainer = styled.div`
 const Container = styled.div`
     width: 100%;
     height: 90px;
-    background-color: transparent;
+    background-color: lightgray;
     display: flex;
     align-items: center;
     jsutify-content: space-between;
     position: absolute;
     z-index: 99;
+    
     
 
 `

@@ -11,6 +11,8 @@ const data = {
                 '1000g': 52.00,
             },
             descriere: 'lorem ipsum blaboajsojas saf sfa fas fasfgaijgoajg afaoj foasf jafo afo af a a',
+            inStoc: 10,
+            reducere: '10%',
         },
         {
             nume: 'Adimel',
@@ -23,6 +25,8 @@ const data = {
                 '1000ml': 55.00,
             },
             descriere: 'lorem ipsum blaboajsojas saf sfa fas fasfgaiasfagagjgoajg afaoj foasf jafo afo afdgagagdg a a',
+            inStoc: 0,
+            reducere: '10%',
         },
         {
             nume: 'Banda de Picurare - DG 10CM',
@@ -35,6 +39,8 @@ const data = {
                 '1000g': 50.00,
             },
             descriere: 'loasdsdsdsrem ipsum blaboajsojas saf sfa fas fasfgaiasfagagjgoajg afaoj foasf jafo afo afdgagaasagdg a a',
+            inStoc: 10,
+            reducere: '10%',
         },
         {
             nume: 'Ardei Gras Barbie F1',
@@ -47,6 +53,8 @@ const data = {
                 '1000g': 66.00,
             },
             descriere: 'lorafsafem ipsum blaboajsojas saf sfa fas fasfgaijgoajg afaoj foasf jafo afo afasd asff a',
+            inStoc: 10,
+            reducere: '10%',
         },
     ]
 }
