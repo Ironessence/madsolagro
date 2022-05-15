@@ -1,18 +1,19 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import HomepageProductCard from './HomepageProductCard';
 
-const ProduseNoi = () => {
+
+const ProduseNoi = (props) => {
+
+    const {products} = props;
+    
+
   return (
     <Container>
         <Title>Produse Noi</Title>
         <Break />
         <ProductsContainer>
-            <HomepageProductCard />
-            <HomepageProductCard />
-            <HomepageProductCard />
-            <HomepageProductCard />
-            <HomepageProductCard />
+            {products.map((product) => (<HomepageProductCard key={product.slug} product={product} />))}
         </ProductsContainer>
     </Container>
   )

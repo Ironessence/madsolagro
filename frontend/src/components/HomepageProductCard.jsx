@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import productimg from '../assets/product_placeholder.jpg'
 
-const HomepageProductCard = () => {
+const HomepageProductCard = (props) => {
+
+      const {product} = props;
+      
+
   return (
     <Container>
-        <Image src={productimg}/>
-        <Title>Lucernă</Title>
-        <Price>25.00 Lei</Price>
+        <Image src={product && product.imagine}/>
+        <Title>{product && product.name}</Title>
+        <Price>{product && product.pret['500g']}</Price>
         <AddToCartButton>Adaugă în coș</AddToCartButton>
     </Container>
   )

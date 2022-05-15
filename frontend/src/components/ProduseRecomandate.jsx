@@ -2,17 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import HomepageProductCard from './HomepageProductCard';
 
-const ProduseRecomandate = () => {
+const ProduseRecomandate = (props) => {
+
+    const {products} = props;
+
   return (
     <Container>
         <Title>Produse Recomandate</Title>
         <Break />
         <ProductsContainer>
-            <HomepageProductCard />
-            <HomepageProductCard />
-            <HomepageProductCard />
-            <HomepageProductCard />
-            <HomepageProductCard />
+            {products.map(product => (
+                <HomepageProductCard key={product.slug} product={product} />
+            ))}
         </ProductsContainer>
     </Container>
   )
