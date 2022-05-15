@@ -55,6 +55,9 @@ const CloseMenu = styled(motion.span)`
     font-weight: 700;
     color: white;
     cursor: pointer;
+    @media only screen and (max-width: 800px) {
+        display: none;
+    }
 `
 
 
@@ -85,6 +88,13 @@ const Container = styled(motion.div)`
     left: 25vw;
     padding: 30px;
     border-radius: 12px;
+    @media only screen and (max-width: 800px) {
+        position: relative;
+        top: 0;
+        left: 0;
+        padding: 0px 30px;
+        width: 100%;
+    }
     
     
 `

@@ -24,6 +24,11 @@ const ProductsContainer = styled.div`
     gap: 30px;
     justify-content: center;
     align-items: center;
+    @media only screen and (max-width: 800px) {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
 `
 
 const Break = styled.div`

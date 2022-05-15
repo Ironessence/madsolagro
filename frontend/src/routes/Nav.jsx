@@ -8,6 +8,7 @@ import cart from '../assets/shopping-cart.svg';
 import { Link, Outlet } from 'react-router-dom';
 import ToateProduseleMeniu from '../components/ToateProduseleMeniu';
 import hamburger from '../assets/hamburger.png';
+import closemenu from '../assets/closemenuicon.png';
 
 
 const Nav = () => {
@@ -22,6 +23,7 @@ const Nav = () => {
 
     const menuOpenToggle = () => {
         setMenuOpen(!menuOpen);
+        console.log(menuOpen);
     }
 
   return (
@@ -33,9 +35,13 @@ const Nav = () => {
             </Link>
             
         </LogoContainer>
-        <Menu>
+        <Menu menuOpen={menuOpen}>
             <Link to='/'>Acasă</Link>
             <Link to='/' onClick={toateProduseleToggle}>Toate Produsele</Link>
+            {toateProduseleOpen && <ToateProduseleMeniu 
+        toateProduseleOpen={toateProduseleOpen}
+        setToateProduseleOpen={setToateProduseleOpen}
+        />}
             <Link to='/'>Promoții</Link>
             <Link to='/'>Contact</Link>
         </Menu>
@@ -44,14 +50,13 @@ const Nav = () => {
             <UserImg src={user}/>
             <CartImg src={cart}/>
             <TotalCartValue>124 Lei</TotalCartValue>
+            <HamburgerDiv
+            onClick={menuOpenToggle}>
             <HamburgerImg 
-            
-            src={hamburger}/>
+            src={!menuOpen ? hamburger : closemenu}/>
+            </HamburgerDiv>
         </EndContainer>
-        {toateProduseleOpen && <ToateProduseleMeniu 
-        toateProduseleOpen={toateProduseleOpen}
-        setToateProduseleOpen={setToateProduseleOpen}
-        />}
+        
     </Container>
     <Outlet />
     </>
@@ -59,10 +64,15 @@ const Nav = () => {
   )
 }
 
+const HamburgerDiv = styled.div`
+    display: flex;
+`
+
 const HamburgerImg = styled.img`
     display: none;
-    width: 40px;
+    width: 30px;
     cursor: pointer;
+    
     @media only screen and (max-width: 800px) {
         display: initial;
     }
@@ -114,18 +124,23 @@ const Menu = styled.div`
     a {
         text-decoration: none;
         color: white;
+        font-size: 22px;
+        font-weight: 600;
         
     }
     @media only screen and (max-width: 800px) {
         position: absolute;
-        display: flex;
+        display: ${props => props.menuOpen ? 'flex' : 'none'};
         flex-direction: column;
         gap: 20px;
-        width: 200px;
+        width: 500px;
         background-color: rgba(38, 38, 38, 1);
-        right: 10px;
+        
         top: 90px;
         padding: 30px 0px;
+        border-radius: 12px;
+        width: 100%;
+        
     }
     
     

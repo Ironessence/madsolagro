@@ -93,6 +93,14 @@ const Container = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @media only screen and (max-width: 800px) {
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+        height: auto;
+        padding: 30px 0px;
+        text-align: center;
+    }
     
 `
 

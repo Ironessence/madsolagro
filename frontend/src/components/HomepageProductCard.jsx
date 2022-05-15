@@ -57,6 +57,9 @@ const Container = styled.div`
     flex-direction: column;
     gap: 10px;
     align-items: center;
+    @media only screen and (max-width: 800px) {
+        width: 50%;
+    }
 `
 
 export default HomepageProductCard

@@ -64,10 +64,11 @@ const Slider = () => {
 const SlideTitle = styled.h1`
   position: absolute;
   width: 50%;
-  font-size: 70px;
+  font-size: clamp(30px, 10vw, 70px);
   color: white;
   text-shadow: 2px 2px 2px gray;
   left: 7%;
+  
 `
 
 const SlideImg = styled.img`

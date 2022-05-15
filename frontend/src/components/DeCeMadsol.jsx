@@ -61,6 +61,11 @@ const FeaturesContainer = styled.div`
     
     margin-left: auto;
     margin-right: auto;
+    @media only screen and (max-width: 800px) {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
 `
 
 const DetailsDescription = styled.p`
@@ -104,6 +109,7 @@ const Title = styled.h1`
 const Container = styled.div`
     position: relative;
     margin: 50px 40px;
+    
 `
 
 export default DeCeMadsol
