@@ -1,8 +1,7 @@
 import React, {useContext} from 'react';
 import styled from 'styled-components';
 import trashicon from '../assets/trash.png';
-import increase from '../assets/increment.png';
-import decrease from '../assets/decrement.png';
+
 import axios from 'axios';
 import { Store } from '../Store';
 
@@ -33,13 +32,14 @@ const CartItemComp = ({item}) => {
         <DetailsDiv>
             <ProductTitle>{nume}</ProductTitle>
             <ProductQuantity>
-                <Decrement 
+                <Decrement
+                disabled={item.quantity === 1}
                 onClick={() => updateCartHandler(item, item.quantity - 1)}
-                src={decrease}/>
+                >-</Decrement>
                 <Quantity>{quantity}</Quantity>
                 <Increment 
                 onClick={() => updateCartHandler(item, item.quantity + 1)}
-                src={increase}/>
+                >+</Increment>
             </ProductQuantity>
         </DetailsDiv>
         <PriceDiv>
@@ -71,12 +71,24 @@ const Quantity = styled.span`
     font-size: 18px;
 `
 
-const Increment = styled.img`
+const Increment = styled.button`
     cursor: pointer;
+    font-size: 25px;
+    font-weight: 600;
+    padding: 2px 5px;
+    border-radius: 50%;
+    border-style: none;
+    width: 30px;
 `
 
-const Decrement = styled.img`
+const Decrement = styled.button`
     cursor: pointer;
+    font-size: 25px;
+    font-weight: 600;
+    padding: 2px 5px;
+    border-radius: 50%;
+    border-style: none;
+    width: 30px;
 `
 
 const TrashIcon = styled.img`
