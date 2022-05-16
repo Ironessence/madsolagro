@@ -1,20 +1,24 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import styled from 'styled-components';
 import logo from '../assets/logo-white.svg';
-import search from '../assets/loupe.svg';
-import user from '../assets/user.svg';
-import cart from '../assets/shopping-cart.svg';
+import searchiconnav from '../assets/loupe.svg';
+import usericonnav from '../assets/user.svg';
+import carticonnav from '../assets/shopping-cart.svg';
 import { Link, Outlet } from 'react-router-dom';
 import ToateProduseleMeniu from '../components/ToateProduseleMeniu';
 import hamburger from '../assets/hamburger.png';
 import closemenu from '../assets/closemenuicon.png';
+import { Store } from '../Store';
+
 
 
 const Nav = () => {
 
     const [toateProduseleOpen, setToateProduseleOpen] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
+
+    
 
     const toateProduseleToggle = (e) => {
         setToateProduseleOpen(!toateProduseleOpen);
@@ -26,6 +30,9 @@ const Nav = () => {
         setMenuOpen(!menuOpen);
         console.log(menuOpen);
     }
+
+    const {state} = useContext(Store);
+    const {cart} = state;
 
   return (
       <>
@@ -47,9 +54,18 @@ const Nav = () => {
             <Link to='/'>Contact</Link>
         </Menu>
         <EndContainer>
-            <SearchImg src={search} />
-            <UserImg src={user}/>
-            <CartImg src={cart}/>
+            <SearchImg src={searchiconnav} />
+            <UserImg src={usericonnav}/>
+            <CartDiv>
+                <Link to='/cart'>
+            <CartImg src={carticonnav}/>
+                </Link>
+            {cart.cartItems.length > 0 && 
+            (<CartBadge>
+                {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+            </CartBadge>)}
+            
+            </CartDiv>
             <TotalCartValue>124 Lei</TotalCartValue>
             <HamburgerDiv
             onClick={menuOpenToggle}>
@@ -64,6 +80,22 @@ const Nav = () => {
 
   )
 }
+
+const CartBadge = styled.span`
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    background-color: green;
+    color: white;
+    width: 20px;
+    text-align: center;
+    border-radius: 50%;
+`
+
+const CartDiv = styled.div`
+    display: flex;
+    position: relative;
+`
 
 const HamburgerDiv = styled.div`
     display: flex;

@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useReducer} from 'react';
+import React, {useState, useEffect, useReducer, useContext} from 'react';
 import {useParams} from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 import axios from 'axios';
@@ -8,6 +8,11 @@ import increment from '../assets/increment.png';
 import decrement from '../assets/decrement.png';
 import {motion} from 'framer-motion';
 import Footer from '../components/Footer';
+import LoadingBox from '../components/LoadingBox';
+import ErrorBox from '../components/ErrorBox';
+import { Store } from '../Store';
+
+
 
 
 
@@ -27,7 +32,7 @@ const reducer = (state, action) => {
 
 
 const ProductPage = () => {
-
+//PARAMS AND GET PRODUCT---------------------------------
             
     const params = useParams();
     const {slug} = params;
@@ -37,10 +42,7 @@ const ProductPage = () => {
         error: '',
         product: [],
       });
-
-      
-    
-      
+     
       useEffect(() => {
         const fetchData = async () => {
           dispatch({type: 'FETCH_REQUEST'});
@@ -59,12 +61,29 @@ const ProductPage = () => {
         
       }, [slug]);
 
-             
       
+//-------------------------------------------------------- 
+      
+      const {state, dispatch: ctxDispatch} = useContext(Store);
+      const {cart} = state;
+
+     const addToCartHandler = async () => {
+
+        const existItem = cart.cartItems.find((x) => x._id === product._id);
+        const quantity = existItem ? existItem.quantity + 1 : 1;
+        const {data} = await axios.get(`/api/produse/${product._id}`)
+        if (data.inStoc < quantity) {
+            window.alert('Ne pare rau. Produsul nu mai este in stoc');
+            return;
+        }
+
+        ctxDispatch({type: 'CART_ADD_ITEM', payload: {...product, quantity }})
+     }
+
   return (
    
-        loading ? <div>Încărcare...</div>
-        : error ? <div>{error}</div>
+        loading ? <LoadingBox />
+        : error ? <ErrorBox />
         :
         <>
     <Container>
@@ -114,7 +133,7 @@ const ProductPage = () => {
                 </QuantityDiv>
                 <AlegeCantitatea>Cantitate</AlegeCantitatea>
             </QtyDiv>
-            <AddToCartButton>
+            <AddToCartButton onClick={addToCartHandler}>
                 Adaugă în coș
             </AddToCartButton>
             
@@ -140,7 +159,7 @@ const ProductPage = () => {
   )
 }
 
-
+//STYLED COMPONENTS-----------------------------------------
 
 const AlegeCantitatea = styled.span`
 

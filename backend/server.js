@@ -18,6 +18,16 @@ app.get('/api/produse/slug/:slug', (req, res) => {
     
 });
 
+app.get('/api/produse/:id', (req, res) => {
+    const product = data.produse.find(x => x._id === req.params.id);
+    if(product) {
+        res.send(product);
+    } else {
+        res.statusMessage(404).send({message: "Produsul nu exista"});
+    }
+    
+});
+
 
 
 const port = process.env.PORT || 5000;

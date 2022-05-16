@@ -1,7 +1,7 @@
 const data = {
     produse: [
         {
-            id: '1dfs32fd',
+            _id: '1',
             nume: 'Ardei Gogosar Kabala F1',
             slug: 'ardei-gogosar-kabala-f1',
             categorie: 'seminte-de-legume',
@@ -12,7 +12,7 @@ const data = {
             reducere: '10%',
         },
         {
-            id: '233fdcc3',
+            _id: '2',
             nume: 'Adimel',
             slug: 'adimel',
             categorie: 'ingrasaminte',
@@ -23,7 +23,7 @@ const data = {
             reducere: '10%',
         },
         {
-            id: 'gfdhdfhfhd3',
+            _id: '3',
             nume: 'Banda de Picurare - DG 10CM',
             slug: 'banda-de-picurare-dg-10cm',
             categorie: 'accesorii-si-sisteme-irigatii',
@@ -34,7 +34,7 @@ const data = {
             reducere: '10%',
         },
         {
-            id: 'dfgdfgdffft6664',
+            _id: '4',
             nume: 'Ardei Gras Barbie F1',
             slug: 'ardei-gras-barbie-f1',
             categorie: 'seminte-de-legume',
