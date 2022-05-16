@@ -3,6 +3,7 @@ import data from './data.js';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import seedRouter from './routes/seedRoutes.js';
+import productRouter from './routes/productRoutes.js';
 
 
 
@@ -20,30 +21,9 @@ mongoose
 const app = express();
 app.use('/api/seed', seedRouter);
 
+app.use('/api/products', productRouter);
 
-app.get('/api/produse', (req, res) => {
-    res.send(data.produse);
-});
 
-app.get('/api/produse/slug/:slug', (req, res) => {
-    const product = data.produse.find(x => x.slug === req.params.slug);
-    if(product) {
-        res.send(product);
-    } else {
-        res.statusMessage(404).send({message: "Produsul nu exista"});
-    }
-    
-});
-
-app.get('/api/produse/:id', (req, res) => {
-    const product = data.produse.find(x => x._id === req.params.id);
-    if(product) {
-        res.send(product);
-    } else {
-        res.statusMessage(404).send({message: "Produsul nu exista"});
-    }
-    
-});
 
 
 

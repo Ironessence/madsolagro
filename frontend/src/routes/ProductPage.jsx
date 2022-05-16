@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useReducer, useContext} from 'react';
 import {useParams} from 'react-router-dom';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import axios from 'axios';
 import checked from '../assets/checked.png';
 import notavailable from '../assets/notavailable.png';
@@ -47,7 +47,7 @@ const ProductPage = () => {
         const fetchData = async () => {
           dispatch({type: 'FETCH_REQUEST'});
           try {
-            const result = await axios.get(`/api/produse/slug/${slug}`);
+            const result = await axios.get(`/api/products/slug/${slug}`);
             dispatch({type: 'FETCH_SUCCESS', payload: result.data})
           } catch(err) {
             dispatch({type: 'FETCH_FAIL', payload: err.message});
@@ -71,7 +71,7 @@ const ProductPage = () => {
 
         const existItem = cart.cartItems.find((x) => x._id === product._id);
         const quantity = existItem ? existItem.quantity + 1 : 1;
-        const {data} = await axios.get(`/api/produse/${product._id}`)
+        const {data} = await axios.get(`/api/products/${product._id}`)
         if (data.inStoc < quantity) {
             window.alert('Ne pare rau. Produsul nu mai este in stoc');
             return;

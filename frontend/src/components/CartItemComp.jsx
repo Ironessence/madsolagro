@@ -1,7 +1,6 @@
 import React, {useContext} from 'react';
 import styled from 'styled-components';
 import trashicon from '../assets/trash.png';
-
 import axios from 'axios';
 import { Store } from '../Store';
 
@@ -11,7 +10,7 @@ const CartItemComp = ({item}) => {
     const {state, dispatch: ctxDispatch} = useContext(Store);
 
     const updateCartHandler = async (item, quantity) => {
-        const {data} = await axios.get(`/api/produse/${item._id}`);
+        const {data} = await axios.get(`/api/products/${item._id}`);
         if (data.inStoc < quantity) {
             window.alert('Ne pare rau. Produsul nu mai este in stoc');
             return;
