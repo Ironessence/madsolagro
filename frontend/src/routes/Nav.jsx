@@ -16,9 +16,10 @@ const Nav = () => {
     const [toateProduseleOpen, setToateProduseleOpen] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
 
-    const toateProduseleToggle = () => {
+    const toateProduseleToggle = (e) => {
         setToateProduseleOpen(!toateProduseleOpen);
         console.log(toateProduseleOpen);
+        e.preventDefault();
     }
 
     const menuOpenToggle = () => {
@@ -103,7 +104,6 @@ const SearchImg = styled.img`
 
 const LogoImg = styled.img`
     width: 200px;
-    
     margin-left: 40px;
 `
 
@@ -124,8 +124,8 @@ const Menu = styled.div`
     a {
         text-decoration: none;
         color: white;
-        font-size: 22px;
-        font-weight: 600;
+        font-size: 20px;
+        font-weight: 400;
         
     }
     @media only screen and (max-width: 800px) {
@@ -153,10 +153,11 @@ const LogoContainer = styled.div`
 const Container = styled.div`
     width: 100%;
     height: 90px;
-    background-color: lightgray;
+    background: rgb(27,27,27);
+background: linear-gradient(180deg, rgba(27,27,27,0.23891625615763545) 0%, rgba(122,122,122,0.20935960591133007) 50%, rgba(255,255,255,0) 100%);
     display: flex;
     align-items: center;
-    jsutify-content: space-between;
+    justify-content: space-between;
     position: absolute;
     z-index: 99;
     

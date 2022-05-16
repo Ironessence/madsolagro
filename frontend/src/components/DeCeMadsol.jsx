@@ -4,10 +4,15 @@ import vegetables from '../assets/seeds.svg';
 import watering from '../assets/watering-plants.svg';
 import heart from '../assets/green-love.svg';
 import house from '../assets/green-house.svg';
+import { motion } from 'framer-motion';
 
 const DeCeMadsol = () => {
   return (
-    <Container>
+    <Container
+    initial={{y: -100, opacity: 0}}
+    animate={{y: 0, opacity: 1}}
+    transition={{duration: 1.2, type: 'spring'}}
+    >
         <Title>De ce Madsol?</Title>
         <Break />
         <FeaturesContainer>
@@ -106,7 +111,7 @@ const Title = styled.h1`
     font-weight: 500;
 `
 
-const Container = styled.div`
+const Container = styled(motion.div)`
     position: relative;
     margin: 50px 40px;
     

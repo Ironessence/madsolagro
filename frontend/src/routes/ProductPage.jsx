@@ -1,12 +1,16 @@
 import React, {useState, useEffect, useReducer} from 'react';
 import {useParams} from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import axios from 'axios';
 import checked from '../assets/checked.png';
 import notavailable from '../assets/notavailable.png';
-import rightarrow from '../assets/rightarrow.png';
-import leftarrow from '../assets/leftarrow.png';
+import increment from '../assets/increment.png';
+import decrement from '../assets/decrement.png';
+import {motion} from 'framer-motion';
 import Footer from '../components/Footer';
+
+
+
 
 const reducer = (state, action) => {
     switch(action.type) {
@@ -24,7 +28,7 @@ const reducer = (state, action) => {
 
 const ProductPage = () => {
 
-    
+            
     const params = useParams();
     const {slug} = params;
 
@@ -33,6 +37,8 @@ const ProductPage = () => {
         error: '',
         product: [],
       });
+
+      
     
       
       useEffect(() => {
@@ -50,8 +56,11 @@ const ProductPage = () => {
         fetchData();
         
         
+        
       }, [slug]);
 
+             
+      
   return (
    
         loading ? <div>Încărcare...</div>
@@ -60,13 +69,21 @@ const ProductPage = () => {
         <>
     <Container>
         <ImageAndDetailsDiv>
-        <ImageContainer>
+        <ImageContainer
+        initial={{x: -200, opacity: 0}}
+        animate={{x: 0, opacity: 1}}
+        transition={{duration: 0.8, type:'spring'}}
+        >
             <ProductImage src={product.imagine}/>
         </ImageContainer>
-        <InfoContainer>
+        <InfoContainer
+        initial={{x: 200, opacity: 0}}
+        animate={{x: 0, opacity: 1}}
+        transition={{duration: 0.8, type:'spring', delay: 0.2}}
+        >
             <ProductName>{product.nume}</ProductName>
             <Break></Break>
-            <ProductPrice>De la x lei</ProductPrice>
+            
             
                 {product.inStoc > 0 
                 ?
@@ -78,28 +95,25 @@ const ProductPage = () => {
                 <Availability>
                 <Icon src={notavailable}/>
                 <AvailabilityText>Stoc epuizat</AvailabilityText>
-                </Availability>
-                
-            }
+                </Availability>}
 
-            <QuantitySelector>
-                <QuantitySelectorText>
-                    Alege cantitatea
-                </QuantitySelectorText>
-                <QuantityInput name='cantitate'>
-                    <Optiune value='300g'>300g</Optiune>
-                    <Optiune value='500g'>500g</Optiune>
-                    <Optiune value='1000g'>1000g</Optiune>
-                </QuantityInput>
-            </QuantitySelector>
-            <TotalPriceAndQuantity>
-                <TotalPrice>Total: 25.00 Lei</TotalPrice>
+            <PriceAndReducere>
+                    <Price>
+                        {product.pret} Lei
+                    </Price>
+                    {product.reducere &&
+                    <Salvezi>Reducere {product.reducere} !</Salvezi>
+                    }
+            </PriceAndReducere>
+            <QtyDiv>
+                
                 <QuantityDiv>
-                <Decrement src={leftarrow}/>
+                <Decrement src={decrement}/>
                 <Cantitate>1</Cantitate>
-                <Increment src={rightarrow}/>
+                <Increment src={increment}/>
                 </QuantityDiv>
-            </TotalPriceAndQuantity>
+                <AlegeCantitatea>Cantitate</AlegeCantitatea>
+            </QtyDiv>
             <AddToCartButton>
                 Adaugă în coș
             </AddToCartButton>
@@ -107,7 +121,11 @@ const ProductPage = () => {
             
         </InfoContainer>
         </ImageAndDetailsDiv>
-        <DescriptionDiv>
+        <DescriptionDiv
+        initial={{y: -200, opacity: 0}}
+        animate={{y: 0, opacity: 1}}
+        transition={{duration: 0.8, type:'spring', delay: 0.4}}
+        >
             <DescriptionDivTitle>
                 Despre produs:
             </DescriptionDivTitle>
@@ -115,11 +133,42 @@ const ProductPage = () => {
                 {product.descriere}
             </ActualDescription>
         </DescriptionDiv>
+        
     </Container>
     <Footer />
     </>
   )
 }
+
+
+
+const AlegeCantitatea = styled.span`
+
+`
+
+const Salvezi = styled.h3`
+    color: green;
+`
+
+const Price = styled.h2`
+    
+    background-color: lightgreen;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 1px 1px 2px 1px gray;
+    margin-bottom: 30px;
+
+`
+
+const PriceAndReducere = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    @media only screen and (max-width: 800px) {
+        justify-content: center;
+    }
+    
+`
 
 const ActualDescription = styled.p`
     margin-top: 30px;
@@ -142,12 +191,13 @@ const AddToCartButton = styled.button`
     transition: 0.5s ease;
     &:hover {
         transform: scale(1.1);
+        background-color: lightgreen;
+        color: black;
     }
 `
 
 const Increment = styled.img`
-    width: 20px;
-    background-color: gray;
+    width: 30px;
     padding: 5px;
     cursor: pointer;
 `
@@ -157,8 +207,8 @@ const Cantitate = styled.h3`
 `
 
 const Decrement = styled.img`
-    width: 20px;
-    background-color: gray;
+    width: 30px;
+    
     padding: 5px;
     cursor: pointer;
     
@@ -167,44 +217,23 @@ const Decrement = styled.img`
 const QuantityDiv = styled.div`
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
 `
 
-const TotalPrice = styled.h2`
 
-`
 
-const TotalPriceAndQuantity = styled.div`
+const QtyDiv = styled.div`
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    
     width: 60%;
     border-bottom: 1px solid gray;
     padding-bottom: 10px;
     margin-bottom: 30px;
-`
-
-const Optiune = styled.option`
-    width: 100px;
-    padding: 10px;
-
-`
-
-const QuantityInput = styled.select`
-    width: 100px;
-    padding: 10px;
-    background-color: lightgray;
-    border-radius: 12px;
-`
-
-const QuantitySelectorText = styled.h3`
-    margin-bottom: 10px;
-`
-
-const QuantitySelector = styled.div`
-    margin-bottom: 30px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid gray;
+    @media only screen and (max-width: 800px) {
+        margin-left: auto;
+        margin-right: auto;
+    }
 `
 
 const AvailabilityText = styled.h4`
@@ -219,13 +248,13 @@ const Availability = styled.div`
     display: flex;
     align-items: center;
     margin-bottom: 30px;
-    border-bottom: 1px solid gray;
+    @media only screen and (max-width: 800px) {
+        justify-content: center;
+    }
     
 `
 
-const ProductPrice = styled.h3`
-    font-weight: 400;
-`
+
 
 const Break = styled.div`
     width: 15%;
@@ -233,15 +262,23 @@ const Break = styled.div`
     background-color: green;
     border-radius: 12px;
     margin-bottom: 10px;
+    @media only screen and (max-width: 800px) {
+        margin-left: auto;
+        margin-right: auto;
+    }
 `
 
 const ProductName = styled.h1`
     font-weight: 700;
     font-size: clamp(15px, 8vw, 40px);
+    font-family: 'Roboto', sans-serif;
+    @media only screen and (max-width: 800px) {
+        margin-top: 30px;
+    }
     
 `
 
-const DescriptionDiv = styled.div`
+const DescriptionDiv = styled(motion.div)`
     margin-top: 80px;
     width: 90%;
 `
@@ -251,15 +288,18 @@ const ImageAndDetailsDiv = styled.div`
     justify-content: center;
     @media only screen and (max-width: 800px) {
         flex-direction: column;
+        align-items: center;
+        
     }
     
 `
 
-const InfoContainer = styled.div`
+const InfoContainer = styled(motion.div)`
     flex: 1;
     flex-direction: column;
     @media only screen and (max-width: 800px) {
         order: 2;
+        
     }
     
 `
@@ -270,7 +310,7 @@ const ProductImage = styled.img`
     border: 2px solid green;
 `
 
-const ImageContainer = styled.div`
+const ImageContainer = styled(motion.div)`
     flex: 1;
     align-items: center;
     display: flex;
@@ -291,6 +331,12 @@ const Container = styled.div`
     top: 100px;
     padding: 20px;
     margin-bottom: 500px;
+    @media only screen and (max-width: 800px) {
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+    }
+    
     
     
 `

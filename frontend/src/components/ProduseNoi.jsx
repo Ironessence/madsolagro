@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import HomepageProductCard from './HomepageProductCard';
-
+import { motion } from 'framer-motion';
 
 const ProduseNoi = (props) => {
 
@@ -9,7 +9,11 @@ const ProduseNoi = (props) => {
     
 
   return (
-    <Container>
+    <Container
+    initial={{y: -100, opacity: 0}}
+    animate={{y: 0, opacity: 1}}
+    transition={{duration: 1.2, type: 'spring'}}
+    >
         <Title>Produse Noi</Title>
         <Break />
         <ProductsContainer>
@@ -46,7 +50,7 @@ const Title = styled.h1`
     font-weight: 500;
 `
 
-const Container = styled.div`
+const Container = styled(motion.div)`
     position: relative;
     margin: 50px 40px;
 `
