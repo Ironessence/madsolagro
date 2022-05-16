@@ -1,10 +1,29 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { Store } from '../Store';
 
 const HomepageProductCard = (props) => {
 
       const {product} = props;
+
+      const {state, dispatch: ctxDispatch} = useContext(Store);
+  const {
+    cart: { cartItems },
+  } = state;
+
+      const addToCartHandler = async (item) => {
+        const existItem = cartItems.find((x) => x._id === product._id);
+        const quantity = existItem ? existItem.quantity + 1 : 1;
+        const {data} = await axios.get(`/api/produse/${item._id}`);
+        if (data.inStoc < quantity) {
+            window.alert('Ne pare rau. Produsul nu mai este in stoc');
+            return;
+        }
+
+        ctxDispatch({type: 'CART_ADD_ITEM', payload: {...item, quantity }})
+    }
       
 
   return (
@@ -16,11 +35,29 @@ const HomepageProductCard = (props) => {
         </Link>
         <Title>{product && product.name}</Title>
         <Price>{product && product.pret['500g']}</Price>
-        <AddToCartButton>Adaugă în coș</AddToCartButton>
+        {product.inStoc === 0 
+        ? <NoStocButton disabled>Stoc epuizat</NoStocButton>
+        : <AddToCartButton
+        onClick={() => addToCartHandler(product)}
+        >Adaugă în coș</AddToCartButton>
+    }
+        
     </Container>
     
   )
 }
+
+const NoStocButton = styled.button`
+    width: 100%;
+    color: white;
+    background-color: gray;
+    padding: 6px 0px;
+    border-style: none;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 35px;
+    transition: 0.5s ease;
+`
 
 const Banner = styled.span`
     font-size: 20px;
