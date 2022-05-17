@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useReducer, useContext} from 'react';
 import {useParams} from 'react-router-dom';
 import styled from 'styled-components';
-import axios from 'axios';
+import Axios from 'axios';
 import checked from '../assets/checked.png';
 import notavailable from '../assets/notavailable.png';
 import increment from '../assets/increment.png';
@@ -11,10 +11,6 @@ import Footer from '../components/Footer';
 import LoadingBox from '../components/LoadingBox';
 import ErrorBox from '../components/ErrorBox';
 import { Store } from '../Store';
-
-
-
-
 
 
 const reducer = (state, action) => {
@@ -47,7 +43,7 @@ const ProductPage = () => {
         const fetchData = async () => {
           dispatch({type: 'FETCH_REQUEST'});
           try {
-            const result = await axios.get(`/api/products/slug/${slug}`);
+            const result = await Axios.get(`/api/products/slug/${slug}`);
             dispatch({type: 'FETCH_SUCCESS', payload: result.data})
           } catch(err) {
             dispatch({type: 'FETCH_FAIL', payload: err.message});
@@ -71,7 +67,7 @@ const ProductPage = () => {
 
         const existItem = cart.cartItems.find((x) => x._id === product._id);
         const quantity = existItem ? existItem.quantity + 1 : 1;
-        const {data} = await axios.get(`/api/products/${product._id}`)
+        const {data} = await Axios.get(`/api/products/${product._id}`)
         if (data.inStoc < quantity) {
             window.alert('Ne pare rau. Produsul nu mai este in stoc');
             return;

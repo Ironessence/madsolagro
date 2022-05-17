@@ -2,6 +2,7 @@ import {Routes, Route} from 'react-router-dom';
 import Cart from './routes/Cart';
 import Homepage from './routes/Homepage';
 import Nav from './routes/Nav';
+import OrderScreen from './routes/OrderScreen';
 import ProductPage from './routes/ProductPage';
 import Shipping from './routes/Shipping';
 import SignIn from './routes/SignIn';
@@ -23,6 +24,7 @@ function App() {
       
       </Route>
       <Route path='/shipping' element={<Shipping />} />
+      <Route path='/order/:id' element={<OrderScreen />}/>
       
       
     </Routes>
