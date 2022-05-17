@@ -1,22 +1,62 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, {useContext, useEffect, useState} from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import bg from '../assets/slide1.png';
+import Axios from 'axios';
+import {Store} from '../Store';
+
 
 const SignIn = () => {
-
+    const navigate = useNavigate();
     const {search} = useLocation();
     const redirectInUrl = new URLSearchParams(search).get('redirect');
     const redirect = redirectInUrl ? redirectInUrl : '/';
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const { state, dispatch: ctxDispatch } = useContext(Store);
+    const {userInfo} = state;
+    const submitHandler = async (e) => {
+        e.preventDefault();
+        try {
+            const {data} = await Axios.post('/api/users/signin', {
+                email,
+                password,
+            });
+            ctxDispatch({type: "USER_SIGNIN",
+            payload: data})
+            localStorage.setItem('userInfo', JSON.stringify(data));
+            navigate(redirect || '/');
+        } catch(err) {
+            alert('E-mail sau parolă incorecte');
+        }
+    }
+
+    useEffect(() => {
+        if(userInfo) {
+            navigate(redirect);
+        }
+    }, [navigate, redirect, userInfo]);
 
   return (
     <Container>
         <Title>Intră în cont</Title>
         <FormWrapper>
-            <Form>
+            <Form onSubmit={submitHandler}>
                 
-                <Input type='email' required placeholder='E-Mail:'/>
-                <Input type='password' required placeholder='Parola:' />
+                <Input 
+                type='email' 
+                required 
+                placeholder='E-Mail:'
+                onChange={(e) => setEmail(e.target.value)}
+                />
+                <Input 
+                type='password' 
+                required 
+                placeholder='Parola:'
+                onChange={(e) => setPassword(e.target.value)} 
+                />
                 <SubmitButton type='submit'>Logare</SubmitButton>
             </Form>
             <NewUserDiv>

@@ -7,6 +7,7 @@ import Slider from '../components/Slider';
 import Footer from '../components/Footer';
 import axios from 'axios';
 
+
 const reducer = (state, action) => {
   switch(action.type) {
     case 'FETCH_REQUEST':
@@ -50,6 +51,7 @@ const Homepage = () => {
 
   return (
     <Container>
+      
         <Slider />
         <DeCeMadsol />
         <ProduseNoi products={products} />

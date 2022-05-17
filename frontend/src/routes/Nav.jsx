@@ -7,9 +7,11 @@ import usericonnav from '../assets/user.svg';
 import carticonnav from '../assets/shopping-cart.svg';
 import { Link, Outlet } from 'react-router-dom';
 import ToateProduseleMeniu from '../components/ToateProduseleMeniu';
+import UserMenuDropdown from '../components/UserMenuDropdown';
 import hamburger from '../assets/hamburger.png';
 import closemenu from '../assets/closemenuicon.png';
 import { Store } from '../Store';
+
 
 
 
@@ -17,22 +19,29 @@ const Nav = () => {
 
     const [toateProduseleOpen, setToateProduseleOpen] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
+    const [userMenuOpen, setUserMenuOpen] = useState(false);
 
     
 
     const toateProduseleToggle = (e) => {
         setToateProduseleOpen(!toateProduseleOpen);
-        console.log(toateProduseleOpen);
         e.preventDefault();
     }
 
     const menuOpenToggle = () => {
         setMenuOpen(!menuOpen);
-        console.log(menuOpen);
+        
+    }
+
+    const toggleUserMenu = () => {
+        setUserMenuOpen(!userMenuOpen);
+        
+        
+        
     }
 
     const {state} = useContext(Store);
-    const {cart} = state;
+    const {cart, userInfo} = state;
 
   return (
       <>
@@ -55,7 +64,25 @@ const Nav = () => {
         </Menu>
         <EndContainer>
             <SearchImg src={searchiconnav} />
-            <UserImg src={usericonnav}/>
+            
+                {userInfo 
+                ?
+                <UserDiv>
+                <UserImg 
+                src={usericonnav}
+                onClick={toggleUserMenu} />
+                {userMenuOpen && 
+                <UserMenuDropdown userInfo={userInfo} />}
+                </UserDiv>
+                :
+                <UserDiv>
+                <Link to='/signin'>
+                <UserImg src={usericonnav}/>
+                </Link>
+                </UserDiv>
+                }
+            
+            
             <CartDiv>
                 <Link to='/cart'>
             <CartImg src={carticonnav}/>
@@ -66,7 +93,7 @@ const Nav = () => {
             </CartBadge>)}
             
             </CartDiv>
-            <TotalCartValue>124 Lei</TotalCartValue>
+            
             <HamburgerDiv
             onClick={menuOpenToggle}>
             <HamburgerImg 
@@ -80,6 +107,11 @@ const Nav = () => {
 
   )
 }
+
+const UserDiv = styled.div`
+    display: flex;
+    position: relative;
+`
 
 const CartBadge = styled.span`
     position: absolute;

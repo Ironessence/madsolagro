@@ -17,7 +17,7 @@ const ToateProduseleMeniu = (props) => {
     <Container
     initial={{y: -200, opacity: 0}}
     animate={{y: 0, opacity: 1}}
-    transition={{duration: 1, type: 'spring'}}
+    transition={{duration: 0.6, type: 'spring'}}
     >
         <Category>
             <CategoryTitle>Semințe de legume</CategoryTitle>
