@@ -48,7 +48,7 @@ const Cart = () => {
             disabled={cartItems.length === 0}
             onClick={checkoutHandler}
             >
-              Către plată
+              Finalizează comanda
             </GoToCheckoutButton>
         </SummaryCart>
       </CartWrapper>}
@@ -65,7 +65,7 @@ const Details = styled.div`
 `
 
 const GoToCheckoutButton = styled.button`
-  width: 50%;
+  width: 80%;
   min-width: 200px;
   align-self: center;
   margin-bottom: 50px;
@@ -81,6 +81,10 @@ const GoToCheckoutButton = styled.button`
   &:hover {
     background-color: lightgreen;
     color: black;
+  }
+  @media only screen and (max-width: 800px) {
+    width: 50%;
+    min-width: 250px;
   }
   
 `

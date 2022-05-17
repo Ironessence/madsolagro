@@ -6,23 +6,31 @@ import Axios from 'axios';
 import {Store} from '../Store';
 
 
-const SignIn = () => {
+const SignUp = () => {
     const navigate = useNavigate();
     const {search} = useLocation();
     const redirectInUrl = new URLSearchParams(search).get('redirect');
     const redirect = redirectInUrl ? redirectInUrl : '/';
 
     const [email, setEmail] = useState('');
+    const [name, setName] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
 
     const { state, dispatch: ctxDispatch } = useContext(Store);
     const {userInfo} = state;
     const submitHandler = async (e) => {
         e.preventDefault();
+        if (password !== confirmPassword) {
+            alert('Parolele nu se potrivesc!');
+            return;
+        }
         try {
-            const {data} = await Axios.post('/api/users/signin', {
+            const {data} = await Axios.post('/api/users/signup', {
+                name,
                 email,
                 password,
+                
             });
             ctxDispatch({type: "USER_SIGNIN",
             payload: data})
@@ -41,9 +49,16 @@ const SignIn = () => {
 
   return (
     <Container>
-        <Title>Intră în cont</Title>
+        <Title>Creează un cont</Title>
         <FormWrapper>
             <Form onSubmit={submitHandler}>
+                <Label>Nume:</Label>
+                <Input 
+                type='text' 
+                required 
+                placeholder='Nume:'
+                onChange={(e) => setName(e.target.value)}
+                />
                 <Label>Adresa de E-Mail:</Label>
                 <Input 
                 type='email' 
@@ -58,10 +73,17 @@ const SignIn = () => {
                 placeholder='Parola:'
                 onChange={(e) => setPassword(e.target.value)} 
                 />
-                <SubmitButton type='submit'>Logare</SubmitButton>
+                <Label>Confirmă parola:</Label>
+                <Input 
+                type='password' 
+                required 
+                placeholder='Confirma Parola:'
+                onChange={(e) => setConfirmPassword(e.target.value)} 
+                />
+                <SubmitButton type='submit'>Înregistrare</SubmitButton>
             </Form>
             <NewUserDiv>
-                <Link to={`/signup?redirect=${redirect}`}>Nu ai cont?</Link>
+                <Link to={`/signin?redirect=${redirect}`}>Ai deja un cont? Click aici.</Link>
             </NewUserDiv>
         </FormWrapper>
     </Container>
@@ -92,8 +114,8 @@ const SubmitButton = styled.button`
     border-radius: 20px;
     cursor: pointer;
     font-weight: 600;
-    color: white;
     margin-top: 20px;
+    color: white;
     transition: 0.5s ease;
     &:hover {
         background-color: lightgreen;
@@ -128,11 +150,11 @@ const FormWrapper = styled.div`
 background: linear-gradient(225deg, rgba(255,255,255,0.41555304276315785) 0%, rgba(242,242,242,0.5306846217105263) 53%, rgba(208,208,208,0.5109477796052632) 100%);
     @media only screen and (max-width: 500px) {
         width: 95%;
-        
     }
 `
 
 const Title = styled.h1`
+    
     padding-top: 12vh;
     text-align: center;
     color: white;
@@ -148,4 +170,4 @@ const Container = styled.div`
     
 `
 
-export default SignIn
+export default SignUp;
