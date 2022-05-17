@@ -105,7 +105,7 @@ const Shipping = () => {
             ctxDispatch({type: "CART_CLEAR"});
             dispatch({type: 'CREATE_SUCCESS'});
             localStorage.removeItem('cartItems');
-            navigate(`/order/${data.order._id}`);
+            navigate(`/comanda-plasata-cu-succes`);
        
         } catch(err) {
             dispatch({type: 'CREATE_FAIL'});
