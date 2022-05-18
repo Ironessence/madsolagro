@@ -2,6 +2,7 @@ import {Routes, Route} from 'react-router-dom';
 import Cart from './routes/Cart';
 import Homepage from './routes/Homepage';
 import Nav from './routes/Nav';
+import OrderHistoryPage from './routes/OrderHistoryPage';
 import OrderScreen from './routes/OrderScreen';
 import OrderTestPage from './routes/OrderTestPage';
 import ProductPage from './routes/ProductPage';
@@ -21,6 +22,7 @@ function App() {
       <Route path='/cart' element={<Cart />}/>
       <Route path='/signin' element={<SignIn />} />
       <Route path='/signup' element={<SignUp />}/>
+      <Route path='/orderhistory' element={<OrderHistoryPage />} />
       
       
       </Route>

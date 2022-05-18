@@ -22,27 +22,14 @@ const UserMenuDropdown = ({userInfo}) => {
     transition={{duration: 0.6, type: 'spring'}}
     >
         <GreetingTitle>{name}</GreetingTitle>
-        <Link to='/profile'>Profil</Link>
+        
         <Link to='/orderhistory'>Istoric comenzi</Link>
         <Link to='#signout' onClick={signoutHandler}>Ieși din cont</Link>
     </Container>
   )
 }
 
-const SignOutButton = styled.button`
-    font-size: 18px;
-    padding: 5px;
-    border-radius: 12px;
-    border-style: none;
-    background-color: transparent;
-    color: white;
-    border: 1px solid gray;
-    cursor: pointer;
-    transition: 0.5s ease;
-    &:hover {
-        background-color: green;
-    }
-`
+
 
 const GreetingTitle = styled.h2`
     text-align-center;
