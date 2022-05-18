@@ -79,7 +79,7 @@ const Shipping = () => {
                 phoneNumber,
         })
         );
-        navigate('/payment');
+        navigate('/comanda-plasata-cu-succes');
     };
   
 
