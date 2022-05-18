@@ -48,7 +48,7 @@ const Cart = () => {
             disabled={cartItems.length === 0}
             onClick={checkoutHandler}
             >
-              Finalizează comanda
+              Pasul următor
             </GoToCheckoutButton>
         </SummaryCart>
       </CartWrapper>}

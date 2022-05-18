@@ -47,7 +47,7 @@ const Break = styled.div`
 `
 
 const Title = styled.h1`
-    font-size: 48px;
+    font-size: clamp(2rem, 4vw, 45px);
     font-weight: 500;
 `
 

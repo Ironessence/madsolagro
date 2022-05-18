@@ -5,26 +5,27 @@ import styled from 'styled-components';
 import { Store } from '../Store';
 import Axios from 'axios';
 
-
 const reducer = (state, action) => {
-    switch(action.type) {
-        case 'CREATE_REQUEST':
-            return {...state, loading: true};
-        case 'CREATE_SUCCESS':
-            return {...state, loading: false};
-        case 'CREATE_FAIL':
-            return {...state, loading: false};
-        default:
-            return state;
+    switch (action.type) {
+      case 'CREATE_REQUEST':
+        return { ...state, loading: true };
+      case 'CREATE_SUCCESS':
+        return { ...state, loading: false };
+      case 'CREATE_FAIL':
+        return { ...state, loading: false };
+      default:
+        return state;
     }
-}
+  };
 
-const Shipping = () => {
+
+
+const FinishOrderPage = () => {
 
     const navigate = useNavigate();
-    const [{loading, error}, dispatch] = useReducer(reducer, {
+    const [{loading}, dispatch] = useReducer(reducer, {
         loading: false,
-        error: '',
+        
     });
     const {state, dispatch: ctxDispatch} = useContext(Store);
     const {
@@ -32,7 +33,7 @@ const Shipping = () => {
         cart,
         
     } = state;
-    const {shippingAddress, cartItems} = cart;
+    const {cartItems} = cart;
 
     const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100;
 
@@ -43,45 +44,6 @@ const Shipping = () => {
     cart.shippingPrice = cart.itemsPrice > 200 ? round2(0) : round2(25);
 
     cart.totalPrice = cart.itemsPrice + cart.shippingPrice;
-    
-    
-
-    const [fullName, setFullName] = useState(shippingAddress.fullName || '');
-    const [address, setAddress] = useState(shippingAddress.address || '');
-    const [city, setCity] = useState(shippingAddress.city || '');
-    const [postalCode, setPostalCode] = useState(shippingAddress.postalCode || '');
-    const [phoneNumber, setPhoneNumber] = useState(shippingAddress.phoneNumber || '');
-
-    useEffect(() => {
-        if(!userInfo) {
-            navigate('/signin?redirect=/shipping');
-        }
-    }, [userInfo, navigate])
-
-    const submitHandler = (e) => {
-        e.preventDefault();
-        ctxDispatch({
-            type: 'SAVE_SHIPPING_ADDRESS',
-            payload: {
-                fullName,
-                address,
-                city,
-                postalCode,
-                phoneNumber,
-            },
-        });
-        localStorage.setItem('shippingAddress',
-        JSON.stringify({
-            fullName,
-                address,
-                city,
-                postalCode,
-                phoneNumber,
-        })
-        );
-        navigate('/comanda-plasata-cu-succes');
-    };
-  
 
     const placeOrderHandler = async () => {
         try {
@@ -105,15 +67,13 @@ const Shipping = () => {
             ctxDispatch({type: "CART_CLEAR"});
             dispatch({type: 'CREATE_SUCCESS'});
             localStorage.removeItem('cartItems');
-            navigate(`/comanda-plasata-cu-succes`);
+            navigate(`/order/${data.order._id}`);
        
         } catch(err) {
             dispatch({type: 'CREATE_FAIL'});
-            alert(err.message);
+            console.log(err, err.message);
         }
     }
-
-    
 
   return (
     <Container>
@@ -136,46 +96,7 @@ const Shipping = () => {
         ))}
         <Link to='/cart'>Editează coș</Link>
         </ProductsContainer>
-        <DeliveryContainer>
-        <DeliveryTitle>Adresa de livrare</DeliveryTitle>
         
-        <Form
-        onSubmit={submitHandler}
-        id='address-form'
-        >
-        <Label>Nume și Prenume</Label>
-        <Input 
-        value={fullName}
-        onChange={(e) => setFullName(e.target.value)}
-        required
-        />
-        <Label>Adresa completă</Label>
-        <Input 
-        value={address}
-        onChange={(e) => setAddress(e.target.value)}
-        required
-        />
-        <Label>Oraș / Localitate</Label>
-        <Input 
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
-        required
-        />
-        <Label>Cod Poștal</Label>
-        <Input 
-        value={postalCode}
-        onChange={(e) => setPostalCode(e.target.value)}
-        required
-        />
-        <Label>Număr de telefon</Label>
-        <Input 
-        value={phoneNumber}
-        onChange={(e) => setPhoneNumber(e.target.value)}
-        required
-        />
-        
-        </Form>
-        </DeliveryContainer>
         <PaymentContainer>
         <PaymentTitle>Metoda de plată</PaymentTitle>
         <RambursContainer>
@@ -201,9 +122,9 @@ const Shipping = () => {
 
 
         <SubmitButton
-        type='submit'
-        form='address-form'
+        type='button'
         onClick={placeOrderHandler}
+        
         >Finalizează comanda</SubmitButton>
         {loading && <LoadingBox>Trimitere comandă</LoadingBox>}
         </RightWrapper>
@@ -227,14 +148,17 @@ const DetailsOrderDiv = styled.div`
 
 const Total = styled.h2`
     align-self: end;
+    margin-right: 10px;
 `
 
 const CostLivrare = styled.h3`
     align-self: end;
+    margin-right: 10px;
 `
 
 const Subtotal = styled.h3`
     align-self: end;
+    margin-right: 10px;
 `
 
 const RightWrapperTitle = styled.h2`
@@ -263,7 +187,12 @@ const ProdInfo = styled.div`
     a {
         color: black;
         font-size: 1.5rem;
+        @media only screen and (max-width: 800px) {
+              font-size: 1rem;
+              white-space: wrap;    
+        }
     }
+    
     
 `
 
@@ -335,6 +264,7 @@ const RightWrapper = styled.div`
     padding: 20px 10px;
     margin-top: 50px;
     height: 500px;
+    border-radius: 12px;
     justify-content: space-around;
     @media only screen and (max-width: 800px) {
         height: auto;
@@ -344,8 +274,14 @@ const RightWrapper = styled.div`
 const LeftWrapper = styled.div`
     display: flex;
     flex-direction: column;
-    flex: 4;
+    width: 75%;
     padding: 20px 10px;
+    
+    @media only screen and (max-width: 800px) {
+     width: 100%;
+    }
+    
+    
     
     
 `
@@ -367,9 +303,7 @@ const MainTitle = styled.h1`
     padding: 30px 0px;
 `
 
-const DeliveryContainer = styled.div`
 
-`
 
 const SubmitButton = styled.button`
     width: 95%;
@@ -395,47 +329,16 @@ const SubmitButton = styled.button`
     }
 `
 
-const Input = styled.input`
-    padding: 7px 0px;
-    width: 85%;
-    align-self: center;
-    border-radius: 5px;
-`
-
-const Label = styled.label`
-    font-weight: 600;
-`
-
-const Form = styled.form`
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 500px;
-    text-align: center;
-    
-    margin-left: auto;
-    margin-right: auto;
-    padding: 30px 0px;
-    border-radius: 12px;
-    @media only screen and (max-width: 600px) {
-        width: 100%;
-    }
-    
-`
-
-const DeliveryTitle = styled.h1`
-    font-size: 35px;
-    
-    padding-bottom: 20px;
-    
-    
-`
 
 const Container = styled.div`
     display: flex;
     flex-direction: column;
-    @media only screen and (max-width: 600px) {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    @media only screen and (max-width: 800px) {
         overflow: hidden;
+        width: 100%;
         
     }
     
@@ -443,4 +346,4 @@ const Container = styled.div`
     
 `
 
-export default Shipping
+export default FinishOrderPage

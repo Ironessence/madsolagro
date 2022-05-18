@@ -13,7 +13,7 @@ const DeCeMadsol = () => {
     animate={{y: 0, opacity: 1}}
     transition={{duration: 1.2, type: 'spring'}}
     >
-        <Title>De ce Madsol?2223</Title>
+        <Title>De ce Madsol?</Title>
         <Break />
         <FeaturesContainer>
         <Feature>
@@ -107,7 +107,7 @@ const Break = styled.div`
 `
 
 const Title = styled.h1`
-    font-size: 48px;
+    font-size: clamp(2rem, 4vw, 45px);
     font-weight: 500;
 `
 

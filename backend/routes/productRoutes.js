@@ -13,7 +13,7 @@ productRouter.get('/slug/:slug', async (req, res) => {
     if(product) {
         res.send(product);
     } else {
-        res.status(404).send({message: "Produsul nu exista222"});
+        res.status(404).send({message: "Produsul nu exista"});
     }
     
 });
@@ -23,7 +23,7 @@ productRouter.get('/:id', async (req, res) => {
     if(product) {
         res.send(product);
     } else {
-        res.status(404).send({message: "Produsul nu exsssista"});
+        res.status(404).send({message: "Produsul nu exista"});
     }
     
 });

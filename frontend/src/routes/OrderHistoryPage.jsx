@@ -65,6 +65,7 @@ const OrderHistoryPage = () => {
                             <Th>ID</Th>
                             <Th>DATA</Th>
                             <Th>TOTAL</Th>
+                            <Th>VIZ.</Th>
                                                        
                             
                         </Tr>
@@ -75,6 +76,13 @@ const OrderHistoryPage = () => {
                                 <Td>{order._id}</Td>
                                 <Td>{order.createdAt.substring(0, 10)}</Td>
                                 <Td>{order.totalPrice.toFixed(2)} Lei</Td>
+                                <Td>
+                                    <Button
+                                    onClick={() => navigate(`/order/${order._id}`)}
+                                    >
+                                        Vezi comanda
+                                    </Button>
+                                </Td>
                                 
                                 
                             </Tr>
@@ -87,25 +95,30 @@ const OrderHistoryPage = () => {
   )
 }
 
+const Button = styled.button`
 
+`
 
 const Td = styled.td`
     border: 1px solid gray;
     padding: 5px 0px;
+    
 `
 
 const Tbody = styled.tbody`
-    
+
 `
 
 const Th = styled.th`
     border: 2px solid gray;
     padding: 10px 0px;
     
+    
 `
 
 const Tr = styled.tr`
     text-align: center;
+    
     
 `
 
@@ -135,6 +148,9 @@ const MainWrapper = styled.div`
     padding: 50px 0px;
     display: flex;
     flex-direction: column;
+    @media only screen and (max-width: 800px) {
+        width: 95%;
+    }
 `
 
 const MainTitle = styled.h1`

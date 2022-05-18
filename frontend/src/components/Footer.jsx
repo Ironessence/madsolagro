@@ -34,6 +34,12 @@ const Footer = () => {
 
 const Logo = styled.img`
     width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    @media only screen and (max-width: 800px) {
+        width: 80%;
+        
+    }
 `
 
 const SocialImg = styled.img`

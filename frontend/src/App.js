@@ -1,12 +1,12 @@
 import {Routes, Route} from 'react-router-dom';
 import Cart from './routes/Cart';
+import FinishOrderPage from './routes/FinishOrderPage';
 import Homepage from './routes/Homepage';
 import Nav from './routes/Nav';
 import OrderHistoryPage from './routes/OrderHistoryPage';
-import OrderScreen from './routes/OrderScreen';
 import OrderTestPage from './routes/OrderTestPage';
 import ProductPage from './routes/ProductPage';
-import Shipping from './routes/Shipping';
+import ShippingAddressPage from './routes/ShippingAddressPage';
 import SignIn from './routes/SignIn';
 import SignUp from './routes/SignUp';
 
@@ -26,8 +26,9 @@ function App() {
       
       
       </Route>
-      <Route path='/shipping' element={<Shipping />} />
-      <Route path='/comanda-plasata-cu-succes' element={<OrderTestPage />}/>
+      <Route path='/shipping' element={<ShippingAddressPage />} />
+      <Route path='finish-order' element={<FinishOrderPage />}/>
+      <Route path='/order/:id' element={<OrderTestPage />}/>
       
       
     </Routes>
