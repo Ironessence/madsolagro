@@ -6,6 +6,7 @@ import Nav from './routes/Nav';
 import OrderHistoryPage from './routes/OrderHistoryPage';
 import OrderTestPage from './routes/OrderTestPage';
 import ProductPage from './routes/ProductPage';
+import SearchPage from './routes/SearchPage';
 import ShippingAddressPage from './routes/ShippingAddressPage';
 import SignIn from './routes/SignIn';
 import SignUp from './routes/SignUp';
@@ -20,6 +21,7 @@ function App() {
       <Route index element={<Homepage />} />
       <Route path='/:categorie/:slug' element={<ProductPage />}/>
       <Route path='/cart' element={<Cart />}/>
+      <Route path='/search' element={<SearchPage />}/>
       <Route path='/signin' element={<SignIn />} />
       <Route path='/signup' element={<SignUp />}/>
       <Route path='/orderhistory' element={<OrderHistoryPage />} />

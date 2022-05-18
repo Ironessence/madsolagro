@@ -1,17 +1,14 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 
+
 const ToateProduseleMeniu = (props) => {
 
-    const {toateProduseleOpen, setToateProduseleOpen} = props;
-
-    const toateProduseleToggle = () => {
-        setToateProduseleOpen(!toateProduseleOpen);
-    }
-
+    const {toateProduseleOpen, setToateProduseleOpen, categories} = props;
+    
 
   return (
     <Container
@@ -19,7 +16,18 @@ const ToateProduseleMeniu = (props) => {
     animate={{y: 0, opacity: 1}}
     transition={{duration: 0.6, type: 'spring'}}
     >
-        <Category>
+    {categories.map((category) => (
+        <Category key={category}>
+        <Link 
+        to={`/search?category=${category}`}
+        onClick={() => setToateProduseleOpen(false)}
+        >{category}</Link>
+        </Category>
+    ))}
+
+
+
+        {/* <Category>
             <CategoryTitle>Semințe de legume</CategoryTitle>
         </Category>
         <Category>
@@ -36,36 +44,14 @@ const ToateProduseleMeniu = (props) => {
         </Category>
         <Category>
             <CategoryTitle>Sisteme și accesorii irigații</CategoryTitle>
-        </Category>
+        </Category> */}
         
-        <CloseMenu
-        whileHover={{rotate: 180}}
-        transition={{duration: 0.6}}
-        onClick={toateProduseleToggle}
-        >X</CloseMenu>
+        
     </Container>
   )
 }
 
-const CloseMenu = styled(motion.span)`
-    position: absolute;
-    right: 5%;
-    top: 5%;
-    font-size: 35px;
-    font-weight: 700;
-    color: white;
-    cursor: pointer;
-    @media only screen and (max-width: 800px) {
-        display: none;
-    }
-`
 
-
-
-const CategoryTitle = styled.h4`
-    color: white;
-    font-size: 22px;
-`
 
 const Category = styled.div`
     display: flex;

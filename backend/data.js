@@ -20,7 +20,7 @@ const data = {
             
             nume: 'Ardei Gogosar Kabala F1',
             slug: 'ardei-gogosar-kabala-f1',
-            categorie: 'seminte-de-legume',
+            categorie: 'Seminte de legume',
             imagine: 'https://images.unsplash.com/photo-1525607551316-4a8e16d1f9ba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=710&q=80',
             pret: 24.00,
             descriere: 'lorem ipsum blaboajsojas saf sfa fas fasfgaijgoajg afaoj foasf jafo afo af a a',

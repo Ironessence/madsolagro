@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import logo from '../assets/logo-white.svg';
 import searchiconnav from '../assets/loupe.svg';
@@ -11,6 +11,8 @@ import UserMenuDropdown from '../components/UserMenuDropdown';
 import hamburger from '../assets/hamburger.png';
 import closemenu from '../assets/closemenuicon.png';
 import { Store } from '../Store';
+import axios from 'axios';
+import SearchBox from '../components/SearchBox';
 
 
 
@@ -20,6 +22,22 @@ const Nav = () => {
     const [toateProduseleOpen, setToateProduseleOpen] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [userMenuOpen, setUserMenuOpen] = useState(false);
+    const [categories, setCategories] = useState([]);
+    const [searchOpen, isSearchOpen] = useState(false);
+
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const {data} = await axios.get(`/api/products/categories`);
+                setCategories(data);
+                
+            } catch(err) {
+                console.log(err, err.message);
+            }
+        };
+        fetchCategories();
+        
+    }, []);
 
     
 
@@ -58,12 +76,19 @@ const Nav = () => {
             {toateProduseleOpen && <ToateProduseleMeniu 
         toateProduseleOpen={toateProduseleOpen}
         setToateProduseleOpen={setToateProduseleOpen}
+        categories={categories}
         />}
-            <Link to='/'>Promoții</Link>
-            <Link to='/'>Contact</Link>
+            
+            <Link to='/contact'>Contact</Link>
         </Menu>
         <EndContainer>
-            <SearchImg src={searchiconnav} />
+            
+            <SearchIconDiv onClick={() => isSearchOpen(!searchOpen)}>
+            <SearchIcon src={searchiconnav}/>
+            </SearchIconDiv>
+            {searchOpen &&  <SearchBox />}
+             
+            
             
                 {userInfo 
                 ?
@@ -108,6 +133,16 @@ const Nav = () => {
   )
 }
 
+const SearchIconDiv = styled.div`
+    display: flex;
+    position: relative;
+`
+
+const SearchIcon = styled.img`
+    width: 25px;
+    cursor: pointer;
+`
+
 const UserDiv = styled.div`
     display: flex;
     position: relative;
@@ -143,13 +178,6 @@ const HamburgerImg = styled.img`
     }
 `
 
-const TotalCartValue = styled.p`
-    color: white;
-    @media only screen and (max-width: 800px) {
-        display: none;
-    }
-    
-`
 
 const CartImg = styled.img`
     width: 25px;
@@ -161,10 +189,7 @@ const UserImg = styled.img`
     cursor: pointer;
 `
 
-const SearchImg = styled.img`
-    width: 25px;
-    cursor: pointer;
-`
+
 
 const LogoImg = styled.img`
     width: 200px;
