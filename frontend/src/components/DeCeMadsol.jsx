@@ -13,7 +13,7 @@ const DeCeMadsol = () => {
     animate={{y: 0, opacity: 1}}
     transition={{duration: 1.2, type: 'spring'}}
     >
-        <Title>De ce Madsol?</Title>
+        <Title>De ce Madsol?2223</Title>
         <Break />
         <FeaturesContainer>
         <Feature>
