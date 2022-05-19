@@ -13,6 +13,7 @@ import closemenu from '../assets/closemenuicon.png';
 import { Store } from '../Store';
 import axios from 'axios';
 import SearchBox from '../components/SearchBox';
+import AdminDropdown from '../components/AdminDropdown';
 
 
 
@@ -24,6 +25,7 @@ const Nav = () => {
     const [userMenuOpen, setUserMenuOpen] = useState(false);
     const [categories, setCategories] = useState([]);
     const [searchOpen, isSearchOpen] = useState(false);
+    const [adminMenuOpen, setAdminMenuOpen] = useState(false);
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -54,8 +56,11 @@ const Nav = () => {
     const toggleUserMenu = () => {
         setUserMenuOpen(!userMenuOpen);
         
-        
-        
+               
+    }
+
+    const toggleAdminMenu = () => {
+        setAdminMenuOpen(!adminMenuOpen);
     }
 
     const {state} = useContext(Store);
@@ -106,6 +111,16 @@ const Nav = () => {
                 </Link>
                 </UserDiv>
                 }
+                {userInfo && userInfo.isAdmin && 
+                (
+                    <AdminDiv>
+                        <AdminSpan
+                        onClick={toggleAdminMenu}
+                        >A</AdminSpan>
+                        {adminMenuOpen && <AdminDropdown userInfo={userInfo}/>}
+                    </AdminDiv>
+                    
+                )}
             
             
             <CartDiv>
@@ -132,6 +147,18 @@ const Nav = () => {
 
   )
 }
+
+const AdminSpan = styled.span`
+    font-size: 32px;
+    font-weight: 400;
+    color: white;
+    cursor: pointer;
+`
+
+const AdminDiv = styled.div`
+    display: flex;
+    position: relative;
+`
 
 const SearchIconDiv = styled.div`
     display: flex;

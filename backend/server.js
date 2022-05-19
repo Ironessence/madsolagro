@@ -6,6 +6,7 @@ import seedRouter from './routes/seedRoutes.js';
 import productRouter from './routes/productRoutes.js';
 import userRouter from './routes/userRoutes.js';
 import orderRouter from './routes/orderRoutes.js';
+import uploadRouter from './routes/uploadRoutes.js';
 
 
 
@@ -25,6 +26,8 @@ const app = express();
 app.use(express.json());
 
 app.use(express.urlencoded({extended: true}));
+
+app.use('/api/upload', uploadRouter);
 
 app.use('/api/seed', seedRouter);
 
