@@ -221,6 +221,11 @@ const UserImg = styled.img`
 const LogoImg = styled.img`
     width: 200px;
     margin-left: 40px;
+    margin-top: 10px;
+    @media only screen and (max-width: 800px) {
+        width: 170px;
+        margin-top: 10px;
+    }
 `
 
 const EndContainer = styled.div`
@@ -264,13 +269,18 @@ const Menu = styled.div`
 
 const LogoContainer = styled.div`
     flex: 1;
+    @media only screen and (max-width: 800px) {
+        
+    }
 `
 
 const Container = styled.div`
     width: 100%;
     height: 90px;
-    background: rgb(27,27,27);
-background: linear-gradient(180deg, rgba(27,27,27,0.23891625615763545) 0%, rgba(122,122,122,0.20935960591133007) 50%, rgba(255,255,255,0) 100%);
+ // background: rgb(27,27,27);
+ // background: linear-gradient(180deg, rgba(27,27,27,0.23891625615763545) 0%, rgba(122,122,122,0.20935960591133007) 50%, rgba(255,255,255,0) 100%);
+    background-color: rgba(108, 138, 99, 0.4);
+    box-shadow: 1px 2px 4px 3px rgba(38, 38, 38, 0.5);
     display: flex;
     align-items: center;
     justify-content: space-between;

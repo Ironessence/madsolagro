@@ -27,7 +27,7 @@ const AdminDropdown = ({userInfo}) => {
         <Link to='/admin/orders'>Listă Comenzi</Link>
         <Link to='/admin/users'>Listă Useri</Link>
         
-        <Link to='#signout' onClick={signoutHandler}>Ieși din cont</Link>
+        
     </Container>
   )
 }

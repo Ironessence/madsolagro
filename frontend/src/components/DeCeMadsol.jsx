@@ -101,7 +101,7 @@ const Break = styled.div`
     color: green;
     height: 6px;
     border-radius: 12px;
-    background-color: lightgreen;
+    background-color: #2a8507;
     margin-top: 5px;
     
 `
@@ -113,7 +113,12 @@ const Title = styled.h1`
 
 const Container = styled(motion.div)`
     position: relative;
-    margin: 50px 40px;
+    padding: 50px 0px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    
+    
     
 `
 
