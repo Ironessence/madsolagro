@@ -16,6 +16,9 @@ import SignUp from './routes/SignUp';
 import AdminRoute from './components/AdminRoute';
 import ProductListPage from './routes/ProductListPage';
 import ProductEditPage from './routes/ProductEditPage';
+import OrderListPage from './routes/OrderListPage';
+import UserListPage from './routes/UserListPage';
+import UserEditPage from './routes/UserEditPage';
 
 
 function App() {
@@ -46,9 +49,21 @@ function App() {
       <AdminRoute>
         <ProductListPage />
       </AdminRoute>}/>
+      <Route path='/admin/orders' element={
+      <AdminRoute>
+        <OrderListPage />
+      </AdminRoute>}/>
+      <Route path='/admin/users' element={
+      <AdminRoute>
+        <UserListPage />
+      </AdminRoute>}/>
       <Route path='/admin/product/:id' element={
       <AdminRoute>
         <ProductEditPage />
+      </AdminRoute>}/>
+      <Route path='/admin/user/:id' element={
+      <AdminRoute>
+        <UserEditPage />
       </AdminRoute>}/>
       
       

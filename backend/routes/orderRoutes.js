@@ -8,6 +8,12 @@ import expressAsyncHandler from 'express-async-handler';
 
 const orderRouter = express.Router();
 
+orderRouter.get('/', isAuth, isAdmin,
+expressAsyncHandler(async (req, res) => {
+    const orders = await Order.find().populate('user', 'name');
+    res.send(orders);
+}));
+
 orderRouter.post('/', isAuth, expressAsyncHandler(async (req, res) => {
     const newOrder = new Order({
         orderItems: req.body.orderItems.map((x) => ({...x, product: x._id})),
@@ -78,6 +84,20 @@ orderRouter.get(
             res.status(404).send({message: "Comanda nu a fost gasita"})
         }
 }));
+
+orderRouter.delete(
+    '/:id',
+    isAuth, isAdmin,
+    expressAsyncHandler(async (req, res) => {
+        const order = await Order.findById(req.params.id);
+        if(order) {
+            await order.remove();
+            res.send({message: 'Comanda a fost ștearsă!'})
+        } else {
+            res.status(404).send({message: "Comanda nu a fost gasita!"});
+        }
+    })
+);
 
 
 export default orderRouter;

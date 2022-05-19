@@ -170,7 +170,7 @@ export default function ProductEditPage() {
             type='file'
             
             onChange={uploadFileHandler}
-            required
+            
             />
             {loadingUpload && <LoadingBox>Încărcare imagine...</LoadingBox>}
             <Label>Categorie produs:</Label>
