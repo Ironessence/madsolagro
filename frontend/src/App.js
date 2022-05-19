@@ -1,5 +1,6 @@
 import {Routes, Route} from 'react-router-dom';
 import Cart from './routes/Cart';
+
 import FinishOrderPage from './routes/FinishOrderPage';
 import Homepage from './routes/Homepage';
 import Nav from './routes/Nav';
@@ -19,9 +20,10 @@ function App() {
     <Routes>
       <Route path='/' element={<Nav />}>
       <Route index element={<Homepage />} />
-      <Route path='/:categorie/:slug' element={<ProductPage />}/>
+      <Route path='/:category/:slug' element={<ProductPage />}/>
       <Route path='/cart' element={<Cart />}/>
       <Route path='/search' element={<SearchPage />}/>
+      
       <Route path='/signin' element={<SignIn />} />
       <Route path='/signup' element={<SignUp />}/>
       <Route path='/orderhistory' element={<OrderHistoryPage />} />

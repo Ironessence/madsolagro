@@ -52,6 +52,8 @@ const SearchPage = () => {
     const order = sp.get('order') || 'newest';
     const page = sp.get('page') || 1;
 
+    const [categories, setCategories] = useState([]);
+
     const [{loading, error, products, pages, countProducts}, dispatch] = useReducer(reducer,
         {
             loading: true,
@@ -76,7 +78,7 @@ const SearchPage = () => {
         fetchData();
     }, [category, error, order, page, price, query]);
 
-    const [categories, setCategories] = useState([]);
+    
     useEffect(() => {
         const fetchCategories = async () => {
             try {

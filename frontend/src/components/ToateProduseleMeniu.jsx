@@ -24,29 +24,7 @@ const ToateProduseleMeniu = (props) => {
         >{category}</Link>
         </Category>
     ))}
-
-
-
-        {/* <Category>
-            <CategoryTitle>Semințe de legume</CategoryTitle>
-        </Category>
-        <Category>
-            <CategoryTitle>Îngrășăminte</CategoryTitle>
-        </Category>
-        <Category>
-            <CategoryTitle>Pesticide și protecția plantelor</CategoryTitle>
-        </Category>
-        <Category>
-            <CategoryTitle>Hobby</CategoryTitle>
-        </Category>
-        <Category>
-            <CategoryTitle>Folie profesională - sere și solarii</CategoryTitle>
-        </Category>
-        <Category>
-            <CategoryTitle>Sisteme și accesorii irigații</CategoryTitle>
-        </Category> */}
-        
-        
+       
     </Container>
   )
 }
